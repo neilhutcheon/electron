@@ -4,6 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { useState } from 'react';
 
+const { exec } = require("child_process");
+
 function App() {
   const [value, setValue] = useState('');
 
@@ -12,8 +14,16 @@ function App() {
   }
   
   const runScript = () => {
-    console.log('script time')
-    require("child_process").spawn('python', ['./hello.py']);
+    // const process = require("child_process").spawn('python3', ['hello.py', value]);
+    // console.log(process)
+    exec(`python3 ~/Desktop/Curve10/electronTest/electron/src/hello.py '${value}'`, (err, stdout, stderr) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      console.log(stdout);
+    }
+    );
   }
 
 
@@ -22,7 +32,6 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <input value={value} onChange={handleChange}></input>
-        <div>{value}</div>
         <button onClick={runScript}>Click me to run python script</button>
       </header>
     </div>
