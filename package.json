@@ -62,7 +62,50 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "electron-dev": "electron ."
+    "electron-dev": "electron .",
+    "pack": "build --dir",
+    "dist": "build"
+  },
+  "build": {
+    "appId": "com.neilStuff",
+    "productName": "scriptRunner",
+    "copyright": "Copyright © 2020 Neil Stuff",
+    "mac": {
+      "target": [
+        "zip"
+      ],
+      "publish": [
+        "github"
+      ]
+    },
+    "win": {
+      "publisherName": "neilStuff",
+      "publish": [
+        "github"
+      ],
+      "target": [
+        "nsis"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "tar.gz"
+      ]
+    },
+    "dmg": {
+      "icon": "src/logo.svg"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "neilhutcheon",
+        "repo": "electron",
+        "vPrefixedTagName": true,
+        "private": false,
+        "releaseType": "draft"
+      }
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -137,5 +180,10 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "electron-builder": "^23.1.0",
+    "electron-packager": "^15.5.1",
+    "electron": "latest"
   }
 }
